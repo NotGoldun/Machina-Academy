@@ -1,0 +1,4 @@
+﻿  maincpp.cpp
+c:\users\domen\desktop\c++\machina-academy\odd-even vector\maincpp.cpp(17): warning C4018: '<': signed/unsigned mismatch
+c:\users\domen\desktop\c++\machina-academy\odd-even vector\maincpp.cpp(26): warning C4018: '<': signed/unsigned mismatch
+  Odd-even vector.vcxproj -> C:\Users\domen\Desktop\C++\Machina-Academy\Odd-even vector\Debug\Odd-even vector.exe
