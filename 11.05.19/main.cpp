@@ -1,98 +1,144 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#define PI 3.14f
+
 
 //Polimorfizam radi samo na heapu!
 
+//Zadatak:
+//Napraviti interface Shape koji ima metode Area i Perimeter
+// napraviti klase Triangle, Circle, Square koji implementiraju interface Shape:
+// Napraviti objekte svake podklase i ispisate Area i Perimeter!
 
-class Human
+class Shape
 {
 public:
 
-	int hands;
-	int feet;
-	int eyes;
+	virtual void PrintArea() = 0;
+	virtual void PrintPerimeter() = 0;
+};
 
-	virtual void PrintType()
+class Triangle : public Shape
+{
+public:
+
+	float sideA, sideB, sideC;
+
+	bool canYouMakeTriangle()
 	{
-		std::cout << "I am a human being!" << std::endl;
+		if ((sideA+sideB) > sideC && (sideA + sideC) > sideB && (sideB + sideC) > sideA)
+		{
+			return true;
+		}
+		return false;
 	}
 
-	virtual int getNumberOfHands() = 0;
+	void PrintArea()
+	{
+		std::cout << "Area of triangle is: " << sqrt(((sideA + sideB + sideC) / 2 )*(((sideA + sideB + sideC) / 2)-sideA)*(((sideA + sideB + sideC) / 2 )-sideB)*(((sideA + sideB + sideC) / 2 )-sideC)) << std::endl;
+	}
 
-private:
+	void PrintPerimeter()
+	{
+		std::cout << "Perimeter of triangle is: " << sideA + sideB + sideC << std::endl;
+	}
+};
+
+class Circle : public Shape
+{
+public:
+
+	float radius;
+
+	void PrintArea()
+	{
+		std::cout << "Area of circle is: " << pow(radius, 2) *PI << std::endl;
+	}
+
+	void PrintPerimeter()
+	{
+		std::cout << "Perimeter of circle is: " << 2 * radius*PI << std::endl;
+	}
+};
+
+class Square : public Shape
+{
+public:
+
+	float side;
+
+	void PrintArea()
+	{
+		std::cout << "Area of square is: " << pow(side, 2 )<< std::endl;
+	}
+
+	void PrintPerimeter()
+	{
+		std::cout << "Perimeter of square is: " << 4 * side << std::endl;
+	}
 
 };
 
-class Male : public Human
+class Rectangle : public Shape
 {
 public:
+	float sideA, sideB;
 
-	void PrintType()
+	void PrintArea()
 	{
-		std::cout << "I am a male human being!" << std::endl;
+		std::cout << "Area of rectangle is: " << sideA * sideB << std::endl;
 	}
 
-	int getNumberOfHands()
+	void PrintPerimeter()
 	{
-		return hands;
+		std::cout << "Perimeter of rectangle is: " << 2*sideA + 2*sideB << std::endl;
 	}
-
-private:
-
-};
-
-class Female : public Human
-{
-public:
-
-	void PrintType()
-	{
-		std::cout << "I am a female human being!" << std::endl;
-	}
-
-	int getNumberOfHands()
-	{
-		return hands;
-	}
-
-
-private:
 
 };
 
 
 int main()
 {
-	Male* maleObject = new Male();
-	maleObject->hands = 2;
-	maleObject->feet = 2;
-	maleObject->eyes= 2;
+	Triangle* myTriangle = new Triangle();
+	myTriangle->sideA = 15.0f;
+	myTriangle->sideB = 5.0f;
+	myTriangle->sideC = 17.0f;
 
-	maleObject->PrintType();
+	Circle* myCircle = new Circle();
+	myCircle->radius = 16.0f;
 
-	Female* femaleObject = new Female();
-	femaleObject->PrintType();
+	Square* mySquare = new Square();
+	mySquare->side = 27.0f;
 
-	//Human* humanObject = new Human();
-
-	std::vector<Human*> humans;
-	humans.push_back(maleObject);
-	humans.push_back(femaleObject);
-	//humans.push_back(humanObject);
-
-	std::cout << "============================================================" << std::endl;
-
-	for (size_t i = 0; i < humans.size(); i++)
+	if (myTriangle->canYouMakeTriangle())
 	{
-		humans[i]->PrintType();
-		std::cout << humans[i]->getNumberOfHands() << std::endl;
+		myTriangle->PrintPerimeter();
+		myTriangle->PrintArea();
+	}
+	else
+	{
+		std::cout << "It is impossible to create triangle" << std::endl;
+	}
+
+	myCircle->PrintPerimeter();
+	myCircle->PrintArea();
+
+	mySquare->PrintPerimeter();
+	mySquare->PrintArea();
+
+	std::vector<Shape*> shapes;
+	shapes.push_back(myTriangle);
+	shapes.push_back(myCircle);
+	shapes.push_back(mySquare);
+
+	for (Shape* it : shapes)
+	{
+		it->PrintPerimeter();
+		it->PrintArea();
 	}
 
 	std::cin.get();
-
-	delete femaleObject;
-	delete maleObject;
 }
 
 
