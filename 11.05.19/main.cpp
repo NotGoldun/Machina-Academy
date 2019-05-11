@@ -14,7 +14,7 @@
 class Shape
 {
 public:
-
+	std::string name;
 	virtual void PrintArea() = 0;
 	virtual void PrintPerimeter() = 0;
 };
@@ -24,6 +24,7 @@ class Triangle : public Shape
 public:
 
 	float sideA, sideB, sideC;
+	std::string name = "Triangle";
 
 	bool canYouMakeTriangle()
 	{
@@ -50,6 +51,7 @@ class Circle : public Shape
 public:
 
 	float radius;
+	std::string name = "Circle";
 
 	void PrintArea()
 	{
@@ -67,6 +69,8 @@ class Square : public Shape
 public:
 
 	float side;
+	std::string name = "Square";
+
 
 	void PrintArea()
 	{
@@ -83,7 +87,9 @@ public:
 class Rectangle : public Shape
 {
 public:
+
 	float sideA, sideB;
+	std::string name = "Rectangle";
 
 	void PrintArea()
 	{
@@ -97,40 +103,76 @@ public:
 
 };
 
+void addShape(std::vector<Shape>& shapes)
+{
+	while (true)
+	{
+		int check;
+		std::cout << "Which shape do you want to add? " << std::endl;
+		std::cout << "[1] - Triangle." << std::endl;
+		std::cout << "[2] - Circle." << std::endl;
+		std::cout << "[3] - Square." << std::endl;
+		std::cout << "[4] - Rectangle." << std::endl;
+
+		switch (check)
+		{
+		case 1:
+			std::cout << "Size of side A : " << std::endl;
+			std::cout << "Size of side B : " << std::endl;
+			std::cout << "Size of side C : " << std::endl;
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+		default:
+			std::cout << "Invalid input!" << std::endl;
+			break;
+		}
+
+	}
+
+}
 
 int main()
 {
 	Triangle* myTriangle = new Triangle();
-	myTriangle->sideA = 15.0f;
-	myTriangle->sideB = 5.0f;
-	myTriangle->sideC = 17.0f;
-
 	Circle* myCircle = new Circle();
-	myCircle->radius = 16.0f;
-
 	Square* mySquare = new Square();
-	mySquare->side = 27.0f;
+	Rectangle* myRectangle = new Rectangle();
 
-	if (myTriangle->canYouMakeTriangle())
-	{
-		myTriangle->PrintPerimeter();
-		myTriangle->PrintArea();
-	}
-	else
-	{
-		std::cout << "It is impossible to create triangle" << std::endl;
-	}
-
-	myCircle->PrintPerimeter();
-	myCircle->PrintArea();
-
-	mySquare->PrintPerimeter();
-	mySquare->PrintArea();
-
+	bool valid = true;
 	std::vector<Shape*> shapes;
-	shapes.push_back(myTriangle);
-	shapes.push_back(myCircle);
-	shapes.push_back(mySquare);
+
+	while (valid)
+	{
+		int check;
+		std::cout << "What do you want to do? " << std::endl;
+		std::cout << " [1] Add shape. " << std::endl;
+		std::cout << " [2] Exit and print all areas and perimeters. " << std::endl;
+		std::cin >> check;
+		std::cin.ignore(1000, '\n');
+		std::cin.clear();
+
+		switch (check)
+		{
+		case 1:
+			addShape(shapes);
+			break;
+		case 2:
+			valid = false;
+			break;
+		default:
+			std::cout << "Invalid input. " << std::endl;
+			break;
+		}
+	}
+
 
 	for (Shape* it : shapes)
 	{

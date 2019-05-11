@@ -1,2 +1,6 @@
 ﻿  main.cpp
-  11.05.19.vcxproj -> C:\Users\C Programiranje\Desktop\Desktop\domsut\Machina-Academy\11.05.19\Debug\11.05.19.exe
+c:\users\c programiranje\desktop\desktop\domsut\machina-academy\11.05.19\main.cpp(165): error C2664: 'void addShape(std::vector<Shape,std::allocator<_Ty>> &)': cannot convert argument 1 from 'std::vector<Shape *,std::allocator<_Ty>>' to 'std::vector<Shape,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=Shape
+          ]
