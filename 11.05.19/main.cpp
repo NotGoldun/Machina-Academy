@@ -18,6 +18,8 @@ public:
 		std::cout << "I am a human being!" << std::endl;
 	}
 
+	virtual int getNumberOfHands() = 0;
+
 private:
 
 };
@@ -29,6 +31,11 @@ public:
 	void PrintType()
 	{
 		std::cout << "I am a male human being!" << std::endl;
+	}
+
+	int getNumberOfHands()
+	{
+		return hands;
 	}
 
 private:
@@ -43,6 +50,12 @@ public:
 	{
 		std::cout << "I am a female human being!" << std::endl;
 	}
+
+	int getNumberOfHands()
+	{
+		return hands;
+	}
+
 
 private:
 
@@ -61,21 +74,25 @@ int main()
 	Female* femaleObject = new Female();
 	femaleObject->PrintType();
 
-	Human* humanObject = new Human();
+	//Human* humanObject = new Human();
 
 	std::vector<Human*> humans;
 	humans.push_back(maleObject);
 	humans.push_back(femaleObject);
-	humans.push_back(humanObject);
+	//humans.push_back(humanObject);
 
 	std::cout << "============================================================" << std::endl;
 
 	for (size_t i = 0; i < humans.size(); i++)
 	{
 		humans[i]->PrintType();
+		std::cout << humans[i]->getNumberOfHands() << std::endl;
 	}
 
 	std::cin.get();
+
+	delete femaleObject;
+	delete maleObject;
 }
 
 
